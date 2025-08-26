@@ -1,0 +1,63 @@
+﻿<div class="container mt-5">
+    <div class="row justify-content-center">
+        <!-- Columna izquierda (Formulario -->
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Ingresa las longitudes deseadas (en cm)</h4>
+                </div>
+                <div class="card-body">
+                    <form method="post" asp-controller="Triangle" asp-action="Calculate">
+                        <div class="form-group mt-2">
+                            <label for="a">Lado a:</label>
+                            <input type="number" name="a" class="form-control" required>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label for="b">Lado b:</label>
+                            <input type="number" name="b" class="form-control" required>
+                        </div>
+
+                        <div class="form-group mt-2">
+                            <label for="c">Lado c:</label>
+                            <input type="number" name="c" class="form-control" required>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <button type="submit" class="btn btn-primary btn-block">Calcular</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- Columna derecha (Resultados) -->
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h4 class="mb-0">Resultados del Triángulo</h4>
+                </div>
+                <div class="card-body">
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger">@ViewBag.Error</div>
+                    }
+                    else if (ViewBag.Perimeter != null)
+                    {
+                        <div>
+                            <div>
+                                <p><strong>Perímetro (P)</strong> = @ViewBag.Perimeter u</p>
+                                <p><strong>Semiperímetro (S)</strong> = @ViewBag.SemiPerimeter u</p>
+                                <p><strong>Área (A)</strong> = @ViewBag.Area u²</p>
+                                <p><strong>Tipo:</strong> @ViewBag.Type</p>
+                                <p><strong>Ángulo α </strong> ≈ @Math.Round(ViewBag.Angles.Item1, 2)°</p>
+                                <p><strong>Ángulo β </strong> ≈ @Math.Round(ViewBag.Angles.Item2, 2)°</p>
+                                <p><strong>Ángulo γ </strong> ≈ @Math.Round(ViewBag.Angles.Item3, 2)°</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
